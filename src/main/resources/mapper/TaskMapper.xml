@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.TaskMapper">
+    <select id="selectAll" resultType="com.example.entity.Task">
+        select * from task;
+    </select>
+    <insert id="insertTask" parameterType="com.example.entity.Task"
+    useGeneratedKeys="true" keyProperty="id">
+        insert into task (task_name,create_time,status)
+        values (#{taskName},#{createTime},#{status});
+    </insert>
+    <update id="updateTask" parameterType="com.example.entity.Task">
+        update task
+        set task_name = #{taskName},status=#{status}
+        where id=#{id};
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from task where id=#{id}
+    </delete>
+</mapper>
