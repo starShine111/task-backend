@@ -23,27 +23,25 @@ public class TaskController {
         List<Task> list=taskService.selectAll();
         return Result.success(list);
     }
-    @GetMapping("/test")
-    public String test() {
-        return "ok";
-    }
     @PostMapping("/addTask")
     public Result addTask(@RequestBody Task task){
         if (task.getTaskName() == null || task.getTaskName().trim().isEmpty()) {
             return Result.error("任务名称不能为空");
         }
         task.setCreateTime(new Date());
-        if (task.getStatus() == null || task.getStatus().isEmpty()) {
-            task.setStatus("进行中");
-        }
         taskService.addTask(task);
-        return Result.success(task);
+        return Result.success();
     }
-    @PutMapping("/updateTask/{id}")
-    public Result updateTask(@PathVariable Long id,@RequestBody Task task){
-        task.setId(id);
+    @PutMapping("/updateTask")
+    public Result updateTask(@RequestBody Task task){
+        if (task.getId() == null) {
+            return Result.error("任务ID不能为空");
+        }
+        if (task.getTaskName() == null || task.getTaskName().trim().isEmpty()) {
+            return Result.error("任务名称不能为空");
+        }
         taskService.updateTask(task);
-        return Result.success(task);
+        return Result.success();
     }
     @DeleteMapping("/deleteById/{id}")
     public Result deleteById(@PathVariable Long id){

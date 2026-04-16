@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@ComponentScan("com.example")
+//@ComponentScan("com.example.controller")
 @MapperScan("com.example.mapper")
 public class SpringbootApplication {
 
